@@ -1,0 +1,34 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+   <main>
+    <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>select-table<% } %>" method="POST">
+        <div class="form-control">
+            <label for="simpleLang">Simple Language</label>
+            <input type="text" name="simpleLang" id="simpleLang" value="<% if (editing) { %><%= language.simpleLang %><% } %>">
+        </div>
+        <div class="form-control">
+            <label for="buttonContent">Button Content</label>
+            <input type="text" name="buttonContent" id="buttonContent" value="<% if (editing) { %><%= language.language %><% } %>">
+        </div>
+        <div class="form-control">
+            <label for="pageTitle">Page Title</label>
+            <input type="text" name="pageTitle" id="pageTitle" value="<% if (editing) { %><%= product.price %><% } %>">
+        </div>
+        <div class="form-control">
+            <label for="pageContent">Page Content</label>
+            <textarea name="pageContent" id="pageContent" rows="5"><% if (editing) { %><%= product.description %><% } %></textarea>
+        </div>
+        <% if (editing) { %>
+            <input type="hidden" value="<%= product.id %>" name="productId">
+        <% } %>
+
+        <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Page Content<% } %></button>
+    </form>
+</main>
+<%- include('../includes/end.ejs') %>
