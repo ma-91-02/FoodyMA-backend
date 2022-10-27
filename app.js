@@ -1,7 +1,7 @@
 require("dotenv").config();
 const path = require("path");
 const https = require("https");
-const fs = require('fs');
+const fs = require("fs");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -18,7 +18,8 @@ const adminRoutes = require("./routes/admin");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(helmet());
-app.use("/admin", adminRoutes);
+// app.use("/admin", adminRoutes);
+app.use(adminRoutes);
 // app.use(errorController.get404);
 
 app.use((req, res, next) => {
@@ -49,6 +50,3 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
-
-
