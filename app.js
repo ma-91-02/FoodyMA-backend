@@ -18,8 +18,8 @@ const adminRoutes = require("./routes/admin");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(helmet());
-// app.use("/admin", adminRoutes);
-app.use(adminRoutes);
+app.use("/admin", adminRoutes);
+// app.use(adminRoutes);
 // app.use(errorController.get404);
 
 app.use((req, res, next) => {
