@@ -1,18 +1,17 @@
-const Language = require("../models/language");
-const SelectTable = require("../models/selectTable");
 const Waiter = require("../models/waiter");
 const axios = require("axios");
 
 exports.getHomePage = (req, res, next) => {
-  res.render("admin/home", {
+  res.render("employees/home", {
     pageTitle: "Home",
     path: "/admin/home",
     editing: false,
   });
 };
-exports.getAddLanguage = (req, res, next) => {
-  res.render("admin/edit-language", {
-    pageTitle: "Add Language",
+
+exports.getKitchenPage = (req, res, next) => {
+  res.render("employees/kitchen", {
+    pageTitle: "Kitchen",
     path: "/admin/add-language",
     editing: false,
   });
@@ -55,20 +54,19 @@ exports.getLanguage = async (req, res, next) => {
   }
 };
 
-////////////// select Table /////////////
-exports.getSelectTable = async (req, res, next) => {
-  await Language.find().then((l) => {
-    // console.log(l);
-    res.render("admin/selectTable", {
-      langs: l,
-      pageTitle: "Select Table",
-      path: "/admin/select-table",
+////////////// Cashier Section  /////////////
+
+exports.getCashierPage = async (req, res, next) => {
+  await Waiter.find().then((data) => {
+    console.log(data);
+    res.render("employees/cashier", {
+      data: data,
+      pageTitle: "Cashier",
+      path: "/admin/add-language",
       editing: false,
     });
   });
-  // console.log(l);
 };
-
 exports.postAddSelectTable = (req, res, next) => {
   const simpleLang = req.body.simpleLang;
   const buttonContent = req.body.buttonContent;

@@ -3,7 +3,9 @@
 * {
   box-sizing: border-box;
 }
-
+.mybody{
+background-color: #F4FFEB;
+}
 body {
   padding: 0;
   margin: 0;
@@ -144,7 +146,17 @@ form {
   justify-content: space-around;
   align-items: stretch;
 }
-
+.box{
+  margin: 0.5rem;
+  background-color: #F4FFEB;
+  padding: 0;
+  border-color: #128917!important;
+}
+.boxTitle{
+  background-color: #D2FFAF;
+  color: #128917;
+  width: 100%;
+}
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }

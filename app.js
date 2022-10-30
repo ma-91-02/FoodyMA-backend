@@ -14,11 +14,13 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 const adminRoutes = require("./routes/admin");
+const employeesRoutes = require("./routes/employees");
 // app.use(dotenv);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(helmet());
 app.use("/admin", adminRoutes);
+app.use(employeesRoutes);
 // app.use(adminRoutes);
 // app.use(errorController.get404);
 
@@ -45,7 +47,7 @@ mongoose
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.kaav2jt.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`
   )
   .then((result) => {
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 8000);
   })
   .catch((err) => {
     console.log(err);
