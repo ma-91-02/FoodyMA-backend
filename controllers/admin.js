@@ -3,6 +3,7 @@ const SelectTable = require("../models/selectTable");
 const Waiter = require("../models/waiter");
 const axios = require("axios");
 
+// home page in admin
 exports.getHomePage = (req, res, next) => {
   res.render("admin/home", {
     pageTitle: "Home",
@@ -10,6 +11,8 @@ exports.getHomePage = (req, res, next) => {
     editing: false,
   });
 };
+/////////// Language section ///////////
+// for add new language from admin
 exports.getAddLanguage = (req, res, next) => {
   res.render("admin/edit-language", {
     pageTitle: "Add Language",
@@ -18,6 +21,19 @@ exports.getAddLanguage = (req, res, next) => {
   });
 };
 
+// for get all languages
+exports.getLanguages = async (req, res, next) => {
+  await Language.find().then((dataLangs) => {
+    res.render("admin/languages", {
+      dataLangs: dataLangs,
+      pageTitle: "Languages",
+      path: "/admin/languages",
+      editing: false,
+    });
+  });
+};
+
+// add new language
 exports.postAddLanguage = (req, res, next) => {
   const lang = req.body.language;
   const simpleLang = req.body.simpleLang;
@@ -31,20 +47,14 @@ exports.postAddLanguage = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-  res.redirect("/admin");
+  res.redirect("/admin/languages");
 };
-
+// git api language
 exports.getLanguage = async (req, res, next) => {
   try {
     await Language.find().then((languages) => {
       // console.log(languages);
       res.status(200).json(languages);
-
-      // res.render("admin/languages", {
-      //   prods: languages,
-      //   pageTitle: "Admin Languages",
-      //   path: "/admin/products",
-      // });
     });
   } catch (err) {
     if (!err.statusCode) {
@@ -54,20 +64,50 @@ exports.getLanguage = async (req, res, next) => {
   }
 };
 
+// Delete language
+exports.postDeleteLanguage = (req, res, next) => {
+  const langId = req.body.langId;
+  Language.findByIdAndDelete(langId)
+    .then(() => {
+      console.log("Deleted");
+      res.redirect("/admin/languages");
+    })
+    .catch((err) => console.log(err));
+};
+
 ////////////// select Table /////////////
-exports.getSelectTable = async (req, res, next) => {
+exports.getAddSelectTable = async (req, res, next) => {
   await Language.find().then((l) => {
     // console.log(l);
     res.render("admin/selectTable", {
       langs: l,
-      pageTitle: "Select Table",
-      path: "/admin/select-table",
+      pageTitle: "Add Select Table",
+      path: "/admin/add-select-table",
       editing: false,
     });
   });
   // console.log(l);
 };
 
+// get content select table api
+exports.getSelectTableApi = (req, res, next) => {
+  SelectTable.find().then((selectTable) => {
+    res.status(200).json(selectTable);
+  });
+};
+
+// get content slect table from admin
+exports.getSelectTableContent = (req, res, next) => {
+  SelectTable.find().then((selectTableContant) => {
+    res.render('admin/selectTableContent',{
+      contents:selectTableContant,
+      pageTitle:'Select Table',
+      path:'/admin/select-table',
+      editing:false,
+    })
+  });
+};
+// post select table from admin
 exports.postAddSelectTable = (req, res, next) => {
   const simpleLang = req.body.simpleLang;
   const buttonContent = req.body.buttonContent;
@@ -88,16 +128,6 @@ exports.postAddSelectTable = (req, res, next) => {
       console.log(err);
     });
   res.redirect("/admin");
-};
-exports.getSelectTableApi = (req, res, next) => {
-  SelectTable.find().then((selectTable) => {
-    res.status(200).json(selectTable);
-    // res.render("admin/languages", {
-    //   prods: languages,
-    //   pageTitle: "Admin Languages",
-    //   path: "/admin/products",
-    // });
-  });
 };
 
 exports.postWaiter = (req, res, next) => {

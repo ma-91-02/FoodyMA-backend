@@ -1,0 +1,60 @@
+<%- include('../includes/head.ejs') %>
+
+
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+   <div class="container">
+   <div class="row">
+                            
+                                <%if (contents.length > 0) { %>
+                                    <% for (let content of contents) {  %>
+                                              <div class="card" style="width: 18rem;">
+                                                <div class="card-body">
+                                                  <h5 class="card-title">simple Language: <%= content.simpleLang%></h5>
+                                                  <p class="card-text">Page Content: <%= content.pageContent%></p>
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                  <li class="list-group-item">Page Title: <%= content.pageTitle%></li>
+                                                </ul>
+                                                <div class="card-body">
+                                                    <div class=" button-ma">
+                                                        <form action="/admin/delete-language" method="POST">
+                                                            <input type="hidden" name="contentId" value="<%= content._id%>">
+                                                            <button type="submit"class="btn btn-success">delete</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class= button-ma">
+                                                        <form action="/" method="POST">
+                                                            <input type="hidden" name="contentId" value="<%= content._id%>">
+                                                            <button type="submit"class="btn btn-success">Edit</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                              </div>
+
+
+                                        
+                                        <%}%>
+                                        <%} %>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <%if (contents.length <= 0) { %>
+                                        <div class="center-alert-my">
+                                            <div class="alert alert-primary " role="alert">
+                                                now you don't have any order
+                                            </div>
+                                        </div>
+                                        <%} %>
+                                        <a class="btn btn-success" href="/admin/add-language">Add New Language</a>
+                                    
+        </div>
+    </div>
+</div>
+    
+<%- include('../includes/end.ejs') %>

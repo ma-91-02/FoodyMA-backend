@@ -14,21 +14,33 @@ router.get("/", adminController.getHomePage);
 // /admin/add-language => GET
 router.get("/add-language", adminController.getAddLanguage);
 
+// get all languages 
+router.get("/languages", adminController.getLanguages);
 
-// /admin/v1/languages=>get
+// /admin/v1/languages=>get api
 router.get("/v1/languages", adminController.getLanguage);
-// axios.get('/v2/languages')
 
 // /admin/add-language => POST
 router.post("/add-language", adminController.postAddLanguage);
 
+// delete language
+router.post("/delete-language", adminController.postDeleteLanguage);
+
+
+
 /////////// Select Table ///////////
-router.get("/select-table", adminController.getSelectTable);
-router.post("/select-table", adminController.postAddSelectTable);
-// router.get("v1/select-table", adminController.getSelectTableApi);
+// get add select table 
+router.get("/add-select-table", adminController.getAddSelectTable);
+
+// post select tabel
+router.post("/add-select-table", adminController.postAddSelectTable);
+
+// get select table content api
 router.get("/v1/select-table", adminController.getSelectTableApi);
 
-// router.get("/edit-product/:productId", adminController.getEditProduct);
+// get select table content
+router.get("/select-table", adminController.getSelectTableContent);
+
 
 router.post("/v1/waiter", adminController.postWaiter);
 

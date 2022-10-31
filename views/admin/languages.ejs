@@ -1,27 +1,54 @@
 <%- include('../includes/head.ejs') %>
+
+
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/product.css">
 </head>
 
 <body>
    <%- include('../includes/navigation.ejs') %>
-
-    <main>
-        <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-language<% } %>" method="POST">
-            <div class="form-control">
-                <label for="title">Language</label>
-                <input type="text" name="language" id="language" value="<% if (editing) { %><%= language.language %><% } %>">
-            </div>
-            <div class="form-control">
-                <label for="imageUrl">Simple Language</label>
-                <input type="text" name="simpleLang" id="simpleLang" value="<% if (editing) { %><%= language.simpleLang %><% } %>">
-            </div>
-            
-            <% if (editing) { %>
-                <input type="hidden" value="<%= product.id %>" name="productId">
-            <% } %>
-
-            <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Language<% } %></button>
-        </form>
-    </main>
+   <div class="container">
+   <div class="row">
+                            <div class=" list-group-item box-nave">
+                                <%if (dataLangs.length > 0) { %>
+                                    <% for (let lang of dataLangs) {  %>
+                                        <div class="row">
+                                            
+                                            <div class="col-10">
+                                                <button type="button" class="list-group-item boxTitle list-group-item-action">
+                                                    <%= lang.lang %>                       
+                                                </button>
+                                            </div>
+                                            <div class="col-1 button-ma">
+                                                <form action="/admin/delete-language" method="POST">
+                                                    <input type="hidden" name="langId" value="<%= lang._id%>">
+                                                    <button type="submit"class="btn btn-success">delete</button>
+                                                </form>
+                                            </div>
+                                            <div class="col-1 button-ma">
+                                                <form action="/" method="POST">
+                                                    <input type="hidden" name="mealId" value="<%= lang._id%>">
+                                                    <button type="submit"class="btn btn-success">Edit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                        <%} %>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <%if (dataLangs.length <= 0) { %>
+                                        <div class="center-alert-my">
+                                            <div class="alert alert-primary " role="alert">
+                                                now you don't have any order
+                                            </div>
+                                        </div>
+                                        <%} %>
+                                        <a class="btn btn-success" href="/admin/add-language">Add New Language</a>
+                                    
+        </div>
+    </div>
+</div>
+    
 <%- include('../includes/end.ejs') %>
