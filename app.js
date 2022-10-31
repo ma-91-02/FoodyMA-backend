@@ -48,7 +48,7 @@ mongoose
   )
   .then((result) => {
     const server = app.listen(process.env.PORT || 8000);
-    const io = require("socket.io")(server);
+    const io = require("./socket").init(server);
     io.on("connection", (socket) => {
       console.log("add meal");
     });
