@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const MealCardSchema = new Schema({
+const MealCardKitchenSchema = new Schema({
   tableNumber: {
     type: Number,
     required: true,
@@ -25,4 +25,4 @@ const MealCardSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("MealCard", MealCardSchema);
+module.exports = mongoose.model("MealCardKitchen", MealCardKitchenSchema);

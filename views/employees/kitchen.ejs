@@ -3,10 +3,26 @@
     <link rel="stylesheet" href="/css/product.css">
 </head>
 
-<body>
+<body class="mybody">
    <!-- <%- include('../includes/navigation.ejs') %> -->
-
-    <main>
-       <h1>This is page ktchen</h1>
+   <main>
+        <div class="container">
+            <div class="row row-cols-3">
+            
+        
+        <%if (dataMealCard.length > 0) { %>
+            <% for (let dataKitchen of dataMealCard) {  %>
+                <div class="card border-info box  mb-3" style="max-width: 18rem;">
+                    <div class="card-header boxTitle">Table number <%= dataKitchen.tableNumber %> </div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= dataKitchen.MealTitle %></h5>
+                      <h5 class="card-title"><%= dataKitchen.MealCount %></h5>
+                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    </div>
+                  </div>
+            <%}%>
+            <%} %>
+        </div>
+        </div>
     </main>
 <%- include('../includes/end.ejs') %>

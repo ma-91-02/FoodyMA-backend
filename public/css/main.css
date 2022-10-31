@@ -152,6 +152,13 @@ form {
   padding: 0;
   border-color: #128917!important;
 }
+.boxGoToTable{
+  margin: 0.5rem;
+  /* background-color: #F4FFEB; */
+  background-color: red;
+  padding: 0;
+  border-color: #128917!important;
+}
 .boxTitle{
   background-color: #D2FFAF;
   color: #128917;

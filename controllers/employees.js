@@ -1,5 +1,6 @@
 const Waiter = require("../models/waiter");
-const MealCard = require("../models/mealCard");
+const MealCardKitchen = require("../models/mealCardKitchen");
+const MealCardCashier = require("../models/mealCardCashier");
 const axios = require("axios");
 
 exports.getHomePage = (req, res, next) => {
@@ -9,96 +10,37 @@ exports.getHomePage = (req, res, next) => {
     editing: false,
   });
 };
+/////////////// kitchen Section //////////////
+exports.getKitchenPage = async (req, res, next) => {
+  await MealCardKitchen.find().then((dataMealCard) => {
+    console.log(dataMealCard);
 
-exports.getKitchenPage = (req, res, next) => {
-  res.render("employees/kitchen", {
-    pageTitle: "Kitchen",
-    path: "/admin/add-language",
-    editing: false,
+    res.render("employees/kitchen", {
+      dataMealCard: dataMealCard,
+      pageTitle: "Kitchen",
+      path: "/admin/add-language",
+      editing: false,
+    });
   });
-};
-
-exports.postAddLanguage = (req, res, next) => {
-  const lang = req.body.language;
-  const simpleLang = req.body.simpleLang;
-  const language = new Language({ lang: lang, simpleLang: simpleLang });
-  // console.log(language);
-  language
-    .save()
-    .then((result) => {
-      console.log("created ");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  res.redirect("/admin");
-};
-
-exports.getLanguage = async (req, res, next) => {
-  try {
-    await Language.find().then((languages) => {
-      // console.log(languages);
-      res.status(200).json(languages);
-      // return axios.get("http://127.0.0.1:3000/admin/v1/languages", languages);
-
-      // res.render("admin/languages", {
-      //   prods: languages,
-      //   pageTitle: "Admin Languages",
-      //   path: "/admin/products",
-      // });
-    });
-  } catch (err) {
-    if (!err.statusCode) {
-      err.statusCode = 500;
-    }
-    next(err);
-  }
 };
 
 ////////////// Cashier Section  /////////////
 
 exports.getCashierPage = async (req, res, next) => {
+  let dataCard;
+  await MealCardCashier.find().then((dataMealCard) => (dataCard = dataMealCard));
   await Waiter.find().then((data) => {
     console.log(data);
     res.render("employees/cashier", {
-      data: data,
+      dataMealCard: dataCard,
+      dataWaiter: data,
       pageTitle: "Cashier",
       path: "/admin/add-language",
       editing: false,
     });
   });
 };
-exports.postAddSelectTable = (req, res, next) => {
-  const simpleLang = req.body.simpleLang;
-  const buttonContent = req.body.buttonContent;
-  const pageContent = req.body.pageContent;
-  const pageTitle = req.body.pageTitle;
-  const selectTable = new SelectTable({
-    simpleLang: simpleLang,
-    buttonContent: buttonContent,
-    pageContent: pageContent,
-    pageTitle: pageTitle,
-  });
-  selectTable
-    .save()
-    .then((result) => {
-      console.log("created Product");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  res.redirect("/admin");
-};
-exports.getSelectTableApi = (req, res, next) => {
-  SelectTable.find().then((selectTable) => {
-    res.status(200).json(selectTable);
-    // res.render("admin/languages", {
-    //   prods: languages,
-    //   pageTitle: "Admin Languages",
-    //   path: "/admin/products",
-    // });
-  });
-};
+
 ///////////////////// add to card from mobile app
 exports.postMealCard = (req, res, next) => {
   const tableNumber = req.body.tableNumber;
@@ -106,15 +48,31 @@ exports.postMealCard = (req, res, next) => {
   const MealCount = req.body.MealCount;
   const simpleLang = req.body.simpleLang;
   const MealId = req.body.MealId;
-  const mealCard = new MealCard({
+  const mealCardKitchen = new MealCardKitchen({
     tableNumber: tableNumber,
     MealTitle: MealTitle,
     MealCount: MealCount,
     simpleLang: simpleLang,
     MealId: MealId,
   });
-  console.log(mealCard);
-  mealCard
+  console.log(mealCardKitchen);
+  mealCardKitchen
+    .save()
+    .then((result) => {
+      console.log("created Product");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  const mealCardCashier = new MealCardCashier({
+    tableNumber: tableNumber,
+    MealTitle: MealTitle,
+    MealCount: MealCount,
+    simpleLang: simpleLang,
+    MealId: MealId,
+  });
+  console.log(mealCardCashier);
+  mealCardCashier
     .save()
     .then((result) => {
       console.log("created Product");
