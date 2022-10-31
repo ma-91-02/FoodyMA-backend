@@ -10,28 +10,29 @@
     <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>select-table<% } %>" method="POST">
         <div class="form-control">
             <label for="simpleLang">Language</label>
+
             
-            <select id="mySelect" onchange="myFunction()">
+            <select onchange="myFunction()" id="select_id">
                 <% 
                 function myFunction() {
                     var x = document.getElementById("mySelect").value;
-                    document.getElementById("simpleLang").innerHTML =  x;%>
-                    <input type="text" name="simpleLang" id="simpleLang" value="<%  if (editing) { %><%= language.simpleLang %><% } %>">
-                 <% }
-                if (langs.length > 0) { %>
-                <% for (let lang of langs) {  %>
-
-                <option value="<%= lang.simpleLang%>"><%= lang.lang%></option>
-                <%}%>
-                <%} %>
-            </select>
-        </div>
-        <div class="form-control">
+                    document.querySelector('input[name="simpleLang"]').value = 'Whatever you want!';
+                    %>
+                    <% }
+                    if (langs.length > 0) { %>
+                        <% for (let lang of langs) {  %>
+                            <option value="<%= lang.simpleLang%>"><%= lang.lang%></option>
+                            <%}%>
+                            <%} %>
+                        </select>
+                    </div>
+                    <div class="form-control">
+            <input type="text" name="simpleLang" id="simpleLang" placeholder="simple lang">
             <label for="buttonContent">Button Content</label>
             <input type="text" name="buttonContent" id="buttonContent" value="<% if (editing) { %><%= language.language %><% } %>">
         </div>
         <div class="form-control">
-            <label for="pageTitle">Page Title</label>
+            <label for="pageTitle">Page Title </label>
             <input type="text" name="pageTitle" id="pageTitle" value="<% if (editing) { %><%= product.price %><% } %>">
         </div>
         <div class="form-control">

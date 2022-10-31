@@ -1,4 +1,5 @@
 const Waiter = require("../models/waiter");
+const MealCard = require("../models/mealCard");
 const axios = require("axios");
 
 exports.getHomePage = (req, res, next) => {
@@ -98,16 +99,22 @@ exports.getSelectTableApi = (req, res, next) => {
     // });
   });
 };
-
-exports.postWaiter = (req, res, next) => {
+///////////////////// add to card from mobile app
+exports.postMealCard = (req, res, next) => {
   const tableNumber = req.body.tableNumber;
-  const textMessage = req.body.textMessage;
-  const waiter = new Waiter({
+  const MealTitle = req.body.MealTitle;
+  const MealCount = req.body.MealCount;
+  const simpleLang = req.body.simpleLang;
+  const MealId = req.body.MealId;
+  const mealCard = new MealCard({
     tableNumber: tableNumber,
-    textMessage: textMessage,
+    MealTitle: MealTitle,
+    MealCount: MealCount,
+    simpleLang: simpleLang,
+    MealId: MealId,
   });
-  console.log(waiter);
-  waiter
+  console.log(mealCard);
+  mealCard
     .save()
     .then((result) => {
       console.log("created Product");

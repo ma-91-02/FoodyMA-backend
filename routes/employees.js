@@ -34,7 +34,7 @@ router.get("/kitchen", employeesController.getKitchenPage);
 
 // // router.get("/edit-product/:productId", adminController.getEditProduct);
 
-// router.post("/v1/waiter", adminController.postWaiter);
+router.post("/v1/add-meal-card", employeesController.postMealCard);
 
 // /admin/delete
 // router.post("/delete-product", adminController.postDeleteProduct);
