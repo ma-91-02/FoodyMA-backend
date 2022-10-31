@@ -8,16 +8,20 @@ const employeesController = require("../controllers/employees");
 const router = express.Router();
 // /admin => GET
 router.get("/", employeesController.getHomePage);
+//////////////////////// cashier section ////////////
 // /admin => GET
 router.get("/cashier", employeesController.getCashierPage);
+router.post("/cashier-meal", employeesController.postDeleteMealFromCashier);
+router.post("/cashier-waiter", employeesController.postDeleteWaiterFromCashier);
+//////////////////////// kitchen section ////////////
 // /admin => GET
 router.get("/kitchen", employeesController.getKitchenPage);
+router.post("/kitchen-meal", employeesController.postDeleteMealFromKitchen);
 
 /////////// Language ///////////
 
 // /admin/add-language => GET
 // router.get("/add-language", adminController.getAddLanguage);
-
 
 // // /admin/v1/languages=>get
 // router.get("/v1/languages", adminController.getLanguage);

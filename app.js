@@ -47,7 +47,11 @@ mongoose
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.kaav2jt.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`
   )
   .then((result) => {
-    app.listen(process.env.PORT || 8000);
+    const server = app.listen(process.env.PORT || 8000);
+    const io = require("socket.io")(server);
+    io.on("connection", (socket) => {
+      console.log("add meal");
+    });
   })
   .catch((err) => {
     console.log(err);

@@ -1,4 +1,6 @@
 <%- include('../includes/head.ejs') %>
+<meta http-equiv="refresh" content="2" />
+
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/product.css">
 </head>
@@ -8,28 +10,34 @@
    <main>
         <div class="container">
             <div class="row row-cols-3">
-            
+           
         
         <%if (dataWaiter.length > 0) { %>
             <% for (let dataCashier of dataWaiter) {  %>
                 <div class="card border-info boxGoToTable  mb-3" style="max-width: 18rem;">
-                    <div class="card-header boxTitle">Table number <%= dataCashier.tableNumber %> </div>
+                    <div class="card-header   boxTitle">Table number <%= dataCashier.tableNumber %> </div>
                     <div class="card-body">
                       <h5 class="card-title"><%= dataCashier.textMessage %></h5>
-                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                      <form action="/cashier-waiter" method="POST">
+                        <input type="hidden" name="mealId" value="<%= dataCashier._id%>">
+                        <button type="submit"class="btn btn-success">done</button>
+                      </form>
                     </div>
                   </div>
             <%}%>
             <%} %>
 
-            <%if (dataMealCard.length > 0) { %>
+            <%if (dataMealCard.length > 0) { console.log(dataMealCard); %>
                 <% for (let dataMeal of dataMealCard) {  %>
                     <div class="card border-info box  mb-3" style="max-width: 18rem;">
                         <div class="card-header boxTitle">Table number <%= dataMeal.tableNumber %> </div>
                         <div class="card-body">
                           <h5 class="card-title"><%= dataMeal.MealTitle %></h5>
                           <h5 class="card-title"> <%= dataMeal.MealCount  %></h5>
-                          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                          <form action="/cashier-meal" method="POST">
+                            <input type="hidden" name="mealId" value="<%= dataMeal._id%>">
+                            <button type="submit"class="btn btn-success">done</button>
+                          </form>
                         </div>
                       </div>
                 <%}%>

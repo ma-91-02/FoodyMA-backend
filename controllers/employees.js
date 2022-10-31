@@ -1,6 +1,8 @@
 const Waiter = require("../models/waiter");
 const MealCardKitchen = require("../models/mealCardKitchen");
 const MealCardCashier = require("../models/mealCardCashier");
+
+const io = require('../socket');
 const axios = require("axios");
 
 exports.getHomePage = (req, res, next) => {
@@ -23,14 +25,24 @@ exports.getKitchenPage = async (req, res, next) => {
     });
   });
 };
-
+exports.postDeleteMealFromKitchen = (req, res, next) => {
+  const mealId = req.body.mealId;
+  MealCardKitchen.findByIdAndDelete(mealId)
+    .then(() => {
+      console.log("Deleted");
+      res.redirect("/Kitchen");
+    })
+    .catch((err) => console.log(err));
+};
 ////////////// Cashier Section  /////////////
 
 exports.getCashierPage = async (req, res, next) => {
   let dataCard;
-  await MealCardCashier.find().then((dataMealCard) => (dataCard = dataMealCard));
+  await MealCardCashier.find().then(
+    (dataMealCard) => (dataCard = dataMealCard)
+  );
   await Waiter.find().then((data) => {
-    console.log(data);
+    // console.log(data);
     res.render("employees/cashier", {
       dataMealCard: dataCard,
       dataWaiter: data,
@@ -39,6 +51,25 @@ exports.getCashierPage = async (req, res, next) => {
       editing: false,
     });
   });
+};
+
+exports.postDeleteMealFromCashier = (req, res, next) => {
+  const mealId = req.body.mealId;
+  MealCardCashier.findByIdAndDelete(mealId)
+    .then(() => {
+      console.log("Deleted");
+      res.redirect("/cashier");
+    })
+    .catch((err) => console.log(err));
+};
+exports.postDeleteWaiterFromCashier = (req, res, next) => {
+  const mealId = req.body.mealId;
+  Waiter.findByIdAndDelete(mealId)
+    .then(() => {
+      console.log("Deleted");
+      res.redirect("/cashier");
+    })
+    .catch((err) => console.log(err));
 };
 
 ///////////////////// add to card from mobile app
@@ -57,7 +88,9 @@ exports.postMealCard = (req, res, next) => {
   });
   console.log(mealCardKitchen);
   mealCardKitchen
-    .save()
+    .save();
+    io.getIO().emit('new', {action:'create', post:mealCardKitchen});
+    mealCardKitchen
     .then((result) => {
       console.log("created Product");
     })
@@ -73,7 +106,9 @@ exports.postMealCard = (req, res, next) => {
   });
   console.log(mealCardCashier);
   mealCardCashier
-    .save()
+    .save();
+    io.getIO().emit('new', {action:'create', post:mealCardCashier});
+    mealCardCashier
     .then((result) => {
       console.log("created Product");
     })

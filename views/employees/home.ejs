@@ -3,12 +3,22 @@
     <link rel="stylesheet" href="/css/product.css">
 </head>
 
-<body>
+<body class="mybody">
    <!-- <%- include('../includes/navigation.ejs') %> -->
 
-    <main>
+    <main class="center-alert-my">
+        <div class="container">
+            <div class="row">
+                <div class="homeButton">
 
-        <h1><a href="/cashier">Cashier</a></h1>
-        <h1><a href="Kitchen">Kitchen</a></h1>
+                    <h1><a class='btn btn-primary' role="button" href="/cashier">Cashier</a></h1>
+                </div>
+                <div class="homeButton">
+
+                    <h1><a class='btn btn-primary' role="button" href="Kitchen">Kitchen</a></h1>
+                </div>
+            </div>
+            
+        </div>
     </main>
 <%- include('../includes/end.ejs') %>

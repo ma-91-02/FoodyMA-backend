@@ -10,6 +10,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Open Sans", sans-serif;
+  background-color: #F4FFEB;
 }
 
 main {
@@ -24,11 +25,18 @@ form {
 .centered {
   text-align: center;
 }
-
+.center-alert-my{
+  align-items: center;
+}
+.homeButton{
+  margin-top:100px;
+  margin-left: 43%;
+ 
+}
 .main-header {
   width: 100%;
   height: 3.5rem;
-  background-color: #00695c;
+  background-color: #D2FFAF;
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
@@ -54,13 +62,18 @@ form {
 
 .main-header__item a {
   text-decoration: none;
-  color: white;
+  color: #128917;
+  
 }
 
 .main-header__item a:hover,
 .main-header__item a:active,
 .main-header__item a.active {
-  color: #ffeb3b;
+  /* border:  1px solid#128917; */
+  padding: 16px;
+  width: 100%;
+  background-color: #128917;
+  color:  #D2FFAF;
 }
 
 .mobile-nav {
@@ -151,11 +164,14 @@ form {
   background-color: #F4FFEB;
   padding: 0;
   border-color: #128917!important;
+  text-align: center;
 }
 .boxGoToTable{
   margin: 0.5rem;
   /* background-color: #F4FFEB; */
   background-color: red;
+  opacity: 0.9;
+  text-align: center;
   padding: 0;
   border-color: #128917!important;
 }

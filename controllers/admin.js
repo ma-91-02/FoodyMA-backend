@@ -39,7 +39,6 @@ exports.getLanguage = async (req, res, next) => {
     await Language.find().then((languages) => {
       // console.log(languages);
       res.status(200).json(languages);
-      // return axios.get("http://127.0.0.1:3000/admin/v1/languages", languages);
 
       // res.render("admin/languages", {
       //   prods: languages,
