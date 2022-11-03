@@ -38,7 +38,6 @@ exports.postAddLanguage = (req, res, next) => {
   const lang = req.body.language;
   const simpleLang = req.body.simpleLang;
   const language = new Language({ lang: lang, simpleLang: simpleLang });
-  // console.log(language);
   language
     .save()
     .then((result) => {
@@ -53,7 +52,6 @@ exports.postAddLanguage = (req, res, next) => {
 exports.getLanguage = async (req, res, next) => {
   try {
     await Language.find().then((languages) => {
-      // console.log(languages);
       res.status(200).json(languages);
     });
   } catch (err) {
@@ -78,7 +76,6 @@ exports.postDeleteLanguage = (req, res, next) => {
 ////////////// select Table /////////////
 exports.getAddSelectTable = async (req, res, next) => {
   await Language.find().then((l) => {
-    // console.log(l);
     res.render("admin/AddselectTable", {
       langs: l,
       pageTitle: "Add Select Table",
@@ -86,7 +83,6 @@ exports.getAddSelectTable = async (req, res, next) => {
       editing: false,
     });
   });
-  // console.log(l);
 };
 
 // get content select table api
@@ -150,7 +146,6 @@ exports.postWaiter = (req, res, next) => {
     tableNumber: tableNumber,
     textMessage: textMessage,
   });
-  console.log(waiter);
   waiter
     .save()
     .then((result) => {

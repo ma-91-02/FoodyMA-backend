@@ -5,7 +5,6 @@ const Languages = require("../../models/language");
 
 exports.getAddWaiterContent = async (req, res, next) => {
   await Languages.find().then((data) => {
-    // console.log(l);
     res.render("admin/waiter/addWaiterContent", {
       langs: data,
       pageTitle: "Add Waiter Content",
@@ -13,14 +12,12 @@ exports.getAddWaiterContent = async (req, res, next) => {
       editing: false,
     });
   });
-  // console.log(l);
 };
 
 // get content select table api
 exports.getWaiterPageApi = (req, res, next) => {
   WaiterPage.find().then((waiterPage) => {
         res.status(200).json(waiterPage);
-        console.log('get waiter page api')
       });
     };
 

@@ -6,7 +6,6 @@ const Languages = require("../../models/language");
 
 exports.getAddCategoryContent = async (req, res, next) => {
   await Languages.find().then((data) => {
-    // console.log(l);
     res.render("admin/category/addCategoryContent", {
       langs: data,
       pageTitle: "Add Category Content",
@@ -14,14 +13,12 @@ exports.getAddCategoryContent = async (req, res, next) => {
       editing: false,
     });
   });
-  // console.log(l);
 };
 
 // get content select table api
 exports.getCategoryContentApi = (req, res, next) => {
   CategoryContent.find().then((data) => {
         res.status(200).json(data);
-        console.log('Get Category Content api')
       });
     };
 

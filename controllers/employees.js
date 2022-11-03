@@ -15,8 +15,6 @@ exports.getHomePage = (req, res, next) => {
 /////////////// kitchen Section //////////////
 exports.getKitchenPage = async (req, res, next) => {
   await MealCardKitchen.find().then((dataMealCard) => {
-    console.log(dataMealCard);
-
     res.render("employees/kitchen", {
       dataMealCard: dataMealCard,
       pageTitle: "Kitchen",
@@ -42,7 +40,6 @@ exports.getCashierPage = async (req, res, next) => {
     (dataMealCard) => (dataCard = dataMealCard)
   );
   await Waiter.find().then((data) => {
-    // console.log(data);
     res.render("employees/cashier", {
       dataMealCard: dataCard,
       dataWaiter: data,
@@ -86,7 +83,6 @@ exports.postMealCard = (req, res, next) => {
     simpleLang: simpleLang,
     MealId: MealId,
   });
-  console.log(mealCardKitchen);
   mealCardKitchen
     .save();
     io.getIO().emit('new', {action:'create', post:mealCardKitchen});
@@ -104,7 +100,6 @@ exports.postMealCard = (req, res, next) => {
     simpleLang: simpleLang,
     MealId: MealId,
   });
-  console.log(mealCardCashier);
   mealCardCashier
     .save();
     io.getIO().emit('new', {action:'create', post:mealCardCashier});

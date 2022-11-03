@@ -13,14 +13,12 @@ exports.getAddMeal = async (req, res, next) => {
       editing: false,
     });
   });
-  // console.log(l);
 };
 
 // get content select table api
 exports.getMealApi = (req, res, next) => {
   Meal.find().then((data) => {
         res.status(200).json(data);
-        console.log('get Meal api')
       });
     };
 

@@ -6,7 +6,6 @@ const Languages = require("../../models/language");
 
 exports.getAddWaiterContent = async (req, res, next) => {
   await Languages.find().then((data) => {
-    // console.log(l);
     res.render("admin/category/addCategory", {
       langs: data,
       pageTitle: "Add Category",
@@ -14,14 +13,12 @@ exports.getAddWaiterContent = async (req, res, next) => {
       editing: false,
     });
   });
-  // console.log(l);
 };
 
 // get content select table api
 exports.getCategoryApi = (req, res, next) => {
   Category.find().then((data) => {
         res.status(200).json(data);
-        console.log('get category api')
       });
     };
 

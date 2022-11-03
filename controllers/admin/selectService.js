@@ -8,7 +8,6 @@ const axios = require("axios");
 
 exports.getAddSelectService = async (req, res, next) => {
   await Languages.find().then((data) => {
-    // console.log(l);
     res.render("admin/selectServices/AddSelectServices", {
       langs: data,
       pageTitle: "Add Select service",
@@ -16,14 +15,12 @@ exports.getAddSelectService = async (req, res, next) => {
       editing: false,
     });
   });
-  // console.log(l);
 };
 
 // get content select table api
 exports.getSelectServiceApi = (req, res, next) => {
   SelectService.find().then((selectService) => {
         res.status(200).json(selectService);
-        console.log('get service api')
       });
     };
 
