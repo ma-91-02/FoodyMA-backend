@@ -79,7 +79,7 @@ exports.postDeleteLanguage = (req, res, next) => {
 exports.getAddSelectTable = async (req, res, next) => {
   await Language.find().then((l) => {
     // console.log(l);
-    res.render("admin/selectTable", {
+    res.render("admin/AddselectTable", {
       langs: l,
       pageTitle: "Add Select Table",
       path: "/admin/add-select-table",
@@ -109,12 +109,12 @@ exports.getSelectTableContent = (req, res, next) => {
 };
 // post select table from admin
 exports.postAddSelectTable = (req, res, next) => {
-  const simpleLang = req.body.simpleLang;
+  const language = req.body.language;
   const buttonContent = req.body.buttonContent;
   const pageContent = req.body.pageContent;
   const pageTitle = req.body.pageTitle;
   const selectTable = new SelectTable({
-    simpleLang: simpleLang,
+    language: language,
     buttonContent: buttonContent,
     pageContent: pageContent,
     pageTitle: pageTitle,
@@ -127,9 +127,22 @@ exports.postAddSelectTable = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-  res.redirect("/admin");
+  res.redirect("/admin/select-table");
 };
 
+// Delete language
+exports.postDeleteLanguage = (req, res, next) => {
+  const contentId = req.body.contentId;
+  SelectTable.findByIdAndDelete(contentId)
+    .then(() => {
+      console.log("Deleted");
+      res.redirect("/admin/select-table");
+    })
+    .catch((err) => console.log(err));
+};
+
+
+////////////// Waiter Section  /////////////
 exports.postWaiter = (req, res, next) => {
   const tableNumber = req.body.tableNumber;
   const textMessage = req.body.textMessage;

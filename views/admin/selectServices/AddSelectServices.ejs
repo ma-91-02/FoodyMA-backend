@@ -1,29 +1,29 @@
-<%- include('../includes/head.ejs') %>
+<%- include('../../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/product.css">
 </head>
 
 <body>
-   <%- include('../includes/navigation.ejs') %>
+   <%- include('../../includes/navigation.ejs') %>
 
    <main>
-    <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-select-table<% } %>" method="POST">
+    <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-select-service<% } %>" method="POST">
         <div class="form-control">
-            <label for="simpleLang">Language</label>
-
-  
-            <select   name= "simpleLang" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <label for="language">Language</label>
+            <select   name= "language" class="form-select form-select-sm" aria-label=".form-select-sm example" id="language">
                     <% 
                     if (langs.length > 0) { %>
                         <% for (let lang of langs) {  %>
-                            <option value="<%= lang.simpleLang%>"><%= lang.lang%></option>
+                            <option value="<%= lang.lang%>"><%= lang.lang%></option>
                             <%}%>
                             <%} %>
                         </select>
                     </div>
                     <div class="form-control">
-            <label for="buttonContent">Button Content</label>
-            <input type="text" name="buttonContent" id="buttonContent" value="<% if (editing) { %><%= language.language %><% } %>">
+            <label for="buttonByApp">Button By App</label>
+            <input type="text" name="buttonByApp" id="buttonByApp" value="<% if (editing) { %><%= language.language %><% } %>">
+            <label for="buttonByWaiter">Button By Waiter</label>
+            <input type="text" name="buttonByWaiter" id="buttonByWaiter" value="<% if (editing) { %><%= language.language %><% } %>">
         </div>
         <div class="form-control">
             <label for="pageTitle">Page Title </label>
@@ -40,4 +40,4 @@
         <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Page Content<% } %></button>
     </form>
 </main>
-<%- include('../includes/end.ejs') %>
+<%- include('../../includes/end.ejs') %>

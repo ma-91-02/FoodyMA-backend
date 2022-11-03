@@ -2,16 +2,20 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const SelectTableSchema = new Schema({
+const SelectServiceSchema = new Schema({
   language: {
     type: String,
     required: true,
   },
-  buttonContent: {
+  pageContent: {
     type: String,
     required: true,
   },
-  pageContent: {
+  buttonByApp: {
+    type: String,
+    required: true,
+  },
+  buttonByWaiter: {
     type: String,
     required: true,
   },
@@ -21,4 +25,4 @@ const SelectTableSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("SelectTable", SelectTableSchema);
+module.exports = mongoose.model("SelectService", SelectServiceSchema);

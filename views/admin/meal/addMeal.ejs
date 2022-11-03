@@ -1,0 +1,57 @@
+<%- include('../../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../../includes/navigation.ejs') %>
+   <main>
+    <form class="" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-meal<% } %>" method="POST">
+        <div class="form-control">
+            <label for="language">Language</label>
+            <select  name= "language" class="form-select form-select-sm" aria-label=".form-select-sm example" id="language">
+                <% if (langs.length > 0) { 
+                    for (let lang of langs) {  %>
+                        <option value="<%= lang.lang%>"><%= lang.lang%></option>
+                    <%}
+                } %>
+            </select>
+        </div>
+
+
+
+
+        <!-- <div class="form-control"> -->
+            <!-- <label for="language">Category</label> -->
+                <% if (categores.length > 0) { 
+                    for (let category of categores) {  %>
+                        <div class="form-check form-check-inline">
+                            <input name="categoryIds"class="form-check-input" type="checkbox" id="<%= category.title%>" value="<%= category.id%>">
+                            <label class="form-check-label" for="<%= category.title%>"><%= category.title%></label>
+                        </div>
+                    <%}
+                } %>
+        <!-- </div> -->
+        <div class="form-control">
+            <label for="title">Title Meal</label>
+            <input type="text" name="title" id="title" value="<% if (editing) { %><%= language.language %><% } %>">
+            <label for="imageUrl">Image Url</label>
+            <input type="text" name="imageUrl" id="imageUrl" value="<% if (editing) { %><%= language.language %><% } %>">
+            <label for="price">Price</label>
+            <input type="text" name="price" id="price" value="<% if (editing) { %><%= language.language %><% } %>">
+            <label for="duration">Duration</label>
+            <input type="text" name="duration" id="duration" value="<% if (editing) { %><%= language.language %><% } %>">
+            <label for="ingredients">ingredients</label>
+            <input type="text" name="ingredients" id="ingredients" value="<% if (editing) { %><%= language.language %><% } %>">
+        </div>
+        <!-- <div class="form-control">
+            <label for="pageContent">Page Content</label>
+            <textarea name="pageContent" id="pageContent" rows="5"><% if (editing) { %><%= product.description %><% } %></textarea>
+        </div> -->
+        <% if (editing) { %>
+            <input type="hidden" value="<%= product.id %>" name="productId">
+        <% } %>
+        <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Meal<% } %></button>
+    </form>
+</main>
+<%- include('../../includes/end.ejs') %>

@@ -7,10 +7,6 @@ const LanguageSchema = new Schema({
     type: String,
     required: true,
   },
-  simpleLang: {
-    type: String,
-    required: true,
-  },
 });
 
 module.exports = mongoose.model("Language", LanguageSchema);
