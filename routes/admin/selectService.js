@@ -4,6 +4,7 @@ const axios = require("axios");
 const express = require("express");
 
 const adminSelectServiceController = require("../../controllers/admin/selectService");
+const mobileUserController = require("../../controllers/mobile/user");
 
 const router = express.Router();
 
@@ -24,6 +25,7 @@ router.get(
   "/v1/select-service",
   adminSelectServiceController.getSelectServiceApi
 );
+router.post("/v1/add-user", mobileUserController.postUser);
 
 // // get all languages
 // router.get("/languages", adminController.getLanguages);

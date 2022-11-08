@@ -21,12 +21,22 @@ const adminWaiterPageRoutes = require("./routes/admin/waiterPage");
 const adminCategoryRoutes = require("./routes/admin/category");
 const adminCategoryContentRoutes = require("./routes/admin/categoryContent");
 const adminMealRoutes = require("./routes/admin/meal");
+const mobileUserlRoutes = require("./routes/mobile/user");
+const mobileCartRoutes = require("./routes/mobile/cart");
+const User= require("./models/mobile/user");
 
 // app.use(dotenv);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(helmet());
-
+app.use((req, res, next) => {
+  User.findById("636571cfe6613748943b0747")
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => console.log(err));
+});
 // add routes to app
 app.use("/admin", adminRoutes);
 app.use("/admin", adminSelectServicesRoutes);
@@ -35,6 +45,8 @@ app.use("/admin", adminCategoryRoutes);
 app.use("/admin", adminCategoryContentRoutes);
 app.use("/admin", adminMealRoutes);
 app.use(employeesRoutes);
+app.use(mobileUserlRoutes);
+app.use(mobileCartRoutes);
 // app.use(adminRoutes);
 // app.use(errorController.get404);
 

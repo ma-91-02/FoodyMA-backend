@@ -55,6 +55,11 @@ const MealSchema = new Schema({
     type: String,
     required: false,
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Meal", MealSchema);

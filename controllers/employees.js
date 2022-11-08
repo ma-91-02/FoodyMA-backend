@@ -1,4 +1,4 @@
-const Waiter = require("../models/waiter");
+const Waiter = require("../models/mobile/waiter");
 const MealCardKitchen = require("../models/mealCardKitchen");
 const MealCardCashier = require("../models/mealCardCashier");
 

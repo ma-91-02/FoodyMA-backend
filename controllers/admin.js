@@ -1,6 +1,6 @@
 const Language = require("../models/language");
 const SelectTable = require("../models/selectTable");
-const Waiter = require("../models/waiter");
+const Waiter = require("../models/mobile/waiter");
 const axios = require("axios");
 
 // home page in admin
