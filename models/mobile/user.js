@@ -54,7 +54,7 @@ userSchema.methods.addToCart = function (meal) {
 
 userSchema.methods.removeFromCart = function (mealId) {
   const updatedCartItems = this.cart.items.filter((item) => {
-    return item.mealId.toString() === mealId.toString();
+    return item.mealId.toString() !== mealId.toString();
   });
 
   this.cart.items = updatedCartItems;
@@ -62,7 +62,7 @@ userSchema.methods.removeFromCart = function (mealId) {
 };
 
 userSchema.methods.clearCart = function () {
-  // this.cart = { items: [] };
+  this.cart = { items: [] };
   return this.save();
 };
 

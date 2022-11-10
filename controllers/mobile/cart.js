@@ -33,10 +33,10 @@ exports.postCart = (req, res, next) => {
 
 exports.postCartDeleteMeal = (req, res, next) => {
   const mealId = req.body.mealId;
-
   req.user
     .removeFromCart(mealId)
     .then((result) => {
+      console.log("delete");
       res.redirect("/cart");
     })
     .catch((err) => console.log(err));
