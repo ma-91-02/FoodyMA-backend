@@ -21,6 +21,8 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const mealId = req.body.mealId;
+  console.log(mealId);
+  console.log("=========");
   Meal.findById(mealId)
     .then((meal) => {
       return req.user.addToCart(meal);
