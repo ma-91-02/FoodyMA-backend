@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-const LanguageSchema = new Schema({
+const languageSchema = new Schema({
   lang: {
     type: String,
     required: true,
   },
+}, {
+  collection: 'languages',
+  timestamps: true
 });
 
-module.exports = mongoose.model("Language", LanguageSchema);
+module.exports = mongoose.model("Language", languageSchema);
