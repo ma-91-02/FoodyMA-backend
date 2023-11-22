@@ -7,7 +7,7 @@ const adminCategoryController = require("../../controllers/admin/category");
 
 const router = express.Router();
 
-// /admin/add-language => GET
+// /admin/add-category => GET
 router.get("/add-category", adminCategoryController.getAddWaiterContent);
 
 // // /admin/add-language => POST
